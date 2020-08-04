@@ -100,6 +100,15 @@ public class C3p0Configuration {
 
             System.out.println(connection);
 
+            PreparedStatement preparedStatement = connection.prepareStatement("select 3 * 4 as a from dual");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int a = resultSet.getInt("a");
+                System.out.println(a);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
