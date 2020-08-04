@@ -4,6 +4,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.impl.C3P0Defaults;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -53,6 +55,15 @@ public class C3p0Configuration {
         try (Connection connection = dataSource.getConnection()) {
 
             System.out.println(connection);
+
+            PreparedStatement preparedStatement = connection.prepareStatement("select 3 * 4 as a");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int a = resultSet.getInt("a");
+                System.out.println(a);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
